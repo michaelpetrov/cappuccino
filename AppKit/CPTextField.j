@@ -1198,7 +1198,10 @@ CPTextFieldStatePlaceholder = CPThemeState("placeholder");
     bounds.origin.y += contentInset.top;
     bounds.size.width -= contentInset.left + contentInset.right;
     bounds.size.height -= contentInset.top + contentInset.bottom;
-
+    if(![self isBezeled]) {
+		bounds.size.height += contentInset.top + contentInset.bottom;
+	}
+	
     return bounds;
 }
 
@@ -1259,6 +1262,9 @@ CPTextFieldStatePlaceholder = CPThemeState("placeholder");
 
     if (bezelView)
         [bezelView setBackgroundColor:[self currentValueForThemeAttribute:@"bezel-color"]];
+		
+	
+
 
     var contentView = [self layoutEphemeralSubviewNamed:@"content-view"
                                              positioned:CPWindowAbove
@@ -1289,6 +1295,9 @@ CPTextFieldStatePlaceholder = CPThemeState("placeholder");
         [contentView setLineBreakMode:[self currentValueForThemeAttribute:@"line-break-mode"]];
         [contentView setTextShadowColor:[self currentValueForThemeAttribute:@"text-shadow-color"]];
         [contentView setTextShadowOffset:[self currentValueForThemeAttribute:@"text-shadow-offset"]];
+		
+		[contentView setBackgroundColor:[self textFieldBackgroundColor]];
+		//if (bezelView) [bezelView setBackgroundColor:[self textFieldBackgroundColor]];
     }
 }
 
